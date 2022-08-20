@@ -1,20 +1,20 @@
-PLUGIN.name = "Персональное количество персонажей"
+PLUGIN.name = "Custom character limit"
 PLUGIN.author = "Junk"
 PLUGIN.description = ""
 
 ix.command.Add("GetCharMax", {
-    description = "Узнать ограничение персонажей у игрока",
+    description = "Get the player character limit.",
     adminOnly = true,
     arguments = {
         ix.type.player
     },
     OnRun = function(self, client, target)
-        return "Игрок имеет ограничение - " .. target:GetData("customCharMax", ix.config.Get("maxCharacters", 5)) .. " персонажей"
+        return "The character limit for this player is: ".. target:GetData("customCharMax", ix.config.Get("maxCharacters", 5))
     end
 })
 
 ix.command.Add("SetCharMax", {
-    description = "Установить ограничение персонажей игроку",
+    description = "Change the player character limit.",
     superAdminOnly = true,
     arguments = {
         ix.type.player,
@@ -23,7 +23,7 @@ ix.command.Add("SetCharMax", {
     OnRun = function(self, client, target, newMax)
         newMax = math.Clamp(newMax, 1, 20)
         target:SetData("customCharMax", newMax)
-        return "Игроку установлено ограничение - " .. newMax .. " персонажей"
+        return "The new character limit for this player is now: ".. newMax
     end
 })
 
